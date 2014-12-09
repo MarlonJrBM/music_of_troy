@@ -16,7 +16,7 @@ include_once 'includes/header.php';
     <div class="span8 contact"><!--Begin page content column-->
 
         <h2>Contact Us</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla iaculis mattis lorem, quis gravida nunc iaculis ac. Proin tristique tellus in est vulputate luctus fermentum ipsum molestie. Vivamus tincidunt sem eu magna varius elementum. Maecenas felis tellus, fermentum vitae laoreet vitae, volutpat et urna.</p>
+        <p> Would you like to have your work published on our website? Fill the form below and we'll get back to you as soon as possible!</p>
 
         <?php if (isset($_GET['msg_success'])) {
             if ($_GET['msg_success'] == 1) {
@@ -61,19 +61,12 @@ include_once 'includes/header.php';
     <div class="span4 sidebar page-sidebar"><!-- Begin sidebar column -->
         <h5 class="title-bg">Our Location</h5>
         <address>
-            <strong>Piccolo</strong><br>
-            123 Main St, Suite 600<br>
-            San Francisco, CA 94107<br>
-            <abbr title="Phone">P:</abbr> (123) 456-7890
+            <strong>University of Southern California</strong><br>
+            3730 McClintock Avenue<br>
+            Los Angeles, CA<br>
         </address>
 
-        <address>
-            <strong>Jimmy Doe</strong><br>
-            <a href="mailto:#">first.last@gmail.com</a>
-        </address>
-
-        <h5 class="title-bg">Map Us</h5>
-        <img src="img/location-map.jpg" alt="map">
+        
 
     </div><!-- End sidebar column -->
 

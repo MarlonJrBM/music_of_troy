@@ -209,6 +209,122 @@ function login_check($mysqli) {
 
 function is_admin ($mysqli, $artist_id) {
 
+    $is_admin = false;
+
+    if ($stmt=$mysqli->prepare("SELECT is_admin FROM artists WHERE artist_id=?") ) {
+        $stmt->bind_param('i', $artist_id);
+        $stmt->execute();
+        $stmt->bind_result($is_admin);
+        $stmt->fetch();
+        $stmt->close();
+    }
+
+    return $is_admin;
+
+
 }
+
+function randString($length, $charset='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789')
+{
+    $str = '';
+    $count = strlen($charset);
+    while ($length--) {
+        $str .= $charset[mt_rand(0, $count-1)];
+    }
+    return $str;
+}
+
+
+function upload_path($filename) {
+     if(is_uploaded_file($_FILES[$filename]['tmp_name']) && getimagesize($_FILES[$filename]['tmp_name']) != false) {
+         $name = $_FILES[$filename]['name'];
+         $maxsize = 99999999;
+         $filepath = "img/upload_images/" . randString(5) . "-$name" ;
+         if($_FILES[$filename]['size'] < $maxsize ) {
+             if (move_uploaded_file($_FILES[$filename]['tmp_name'], $filepath)) {
+                 return $filepath;
+             } else {
+                 throw  new Exception("Error uploading file");
+             }
+
+
+         } else {
+             throw new Exception("File Size Error");
+         }
+
+    } else {
+         throw new Exception("Unsupported Image Format!" . var_dump($_FILES));
+     }
+}
+
+function upload($filename, $mysqli, $artist_id) {
+    if(is_uploaded_file($_FILES[$filename]['tmp_name']) && getimagesize($_FILES[$filename]['tmp_name']) != false)
+    {
+        /***  get the image info. ***/
+        $size = getimagesize($_FILES[$filename]['tmp_name']);
+        /*** assign our variables ***/
+        $type = $size['mime'];
+        $imgfp = fopen($_FILES[$filename]['tmp_name'], 'rb');
+        $size = $size[3];
+        $name = $_FILES[$filename]['name'];
+        $maxsize = 99999999;
+
+
+        /***  check the file is less than the maximum file size ***/
+        if($_FILES[$filename]['size'] < $maxsize )
+        {
+            /*** connect to db ***/
+//            $dbh = new PDO("mysql:host=localhost;dbname=testblob", 'username', 'password');
+//
+//            /*** set the error mode ***/
+//            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//            var_dump($name);
+
+            $filepath = "img/upload_images/$name";
+            if (move_uploaded_file($_FILES[$filename]['tmp_name'], $filepath)) {
+                if (!$mysqli->query("UPDATE artists SET artist_image_path='$filepath' WHERE artist_id = $artist_id ")) {
+                    throw  new Exception("Error uploading filepath to database " . var_dump($mysqli) );
+                }
+            } else {
+                throw  new Exception("Error uploading file");
+            }
+//            $rs = $mysqli->query("SELECT * FROM artist_images WHERE artist_id = $artist_id");
+//
+//            if ($rs->num_rows > 0) {
+//                //if we already have an image for the artist, we need to update it
+//                $stmt = $mysqli->prepare("UPDATE artist_images SET artist_id=?, image_type=?, image=?, image_size=?, image_name=? WHERE artist_id=$artist_id");
+//
+//            } else {
+//                //if artist has no image, we insert it
+//
+//                /*** our sql query ***/
+//                $stmt = $mysqli->prepare("INSERT INTO artist_images (artist_id, image_type ,image, image_size, image_name) VALUES (?, ? ,?, ?, ?)");
+//            }
+
+
+//            var_dump($mysqli);
+//            echo "/n/n";
+//            var_dump($stmt);
+
+//            $stmt->bind_param("isbss", $artist_id, $type, $imgfp, $size, $name);
+
+
+            /*** execute the query ***/
+//            $stmt->execute();
+        }
+        else
+        {
+            /*** throw an exception is image is not of type ***/
+            throw new Exception("File Size Error");
+        }
+    }
+    else
+    {
+        // if the file is not less than the maximum allowed, print an error
+        throw new Exception("Unsupported Image Format!" . var_dump($_FILES));
+    }
+}
+
 
 ?>

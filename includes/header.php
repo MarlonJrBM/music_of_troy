@@ -43,10 +43,14 @@ include_once 'includes/pre-header.php';
     <script src="http://code.jquery.com/jquery-latest.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.flexslider.js"></script>
-    <script src="js/jquery.custom.js"></script>
+<!--    <script src="js/jquery.custom.js"></script>-->
     <script type="text/JavaScript" src="js/sha512.js"></script>
     <script type="text/JavaScript" src="js/forms.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
+    <script src="js/dirPagination.js"></script>
+    <script src="js/controllers.js"></script>
     <script type="text/javascript">
+
         $(window).load(function(){
 
             $('.flexslider').flexslider({
@@ -72,7 +76,7 @@ include_once 'includes/pre-header.php';
         <!-- Logo
         ================================================== -->
         <div class="span5 logo">
-            <a href="../index.php"><img class="header-logo" src="img/USC%20logo-GOOD.png" alt="" /></a>
+            <a href="index.php"><img class="header-logo" src="img/USC%20logo-GOOD.png" alt="" /></a>
             <h5>The Music of Troy</h5>
         </div>
 
@@ -84,9 +88,11 @@ include_once 'includes/pre-header.php';
                 <ul class="nav">
                     <li><a href="index.php">Home</a></li>
                     <li><a href="index.php">Artists</a></li>
-                    <li><a href="albums.php">Albums</a></li>
                     <?php
                     if ($is_logged) {
+                        if (is_admin($mysqli, $_SESSION['artist_id'])) {echo '<li><a href="register.php">Register</a></li>';
+                            echo '<li><a href="manager.php">Users</a></li>';
+                        } else
                         echo '<li><a href="profile.php">Profile</a></li>';
                         echo '<li><a href="logout.php">Logout</a></li>';
                     }

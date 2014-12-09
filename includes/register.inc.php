@@ -1,15 +1,9 @@
 <?php
-include_once 'includes/psl-config.php';
+include_once 'includes/pre-header.php';
 
-$mysqli = new mysqli(HOST, USER, PASSWORD, DATABASE);
-
-if ($mysqli->connect_errno) {
-    printf("Connect failed: %s\n", $mysqli->connect_error);
-    exit();
+if (!$is_logged || !is_admin($mysqli, $_SESSION['artist_id'])) {
+header("Location: index.php ");
 }
-
-include_once 'includes/functions.php';
-
 
 $error_msg = "";
 
@@ -89,8 +83,8 @@ if (isset($_POST['username'], $_POST['email'], $_POST['p'])) {
         $password = hash('sha512', $password . $random_salt);
 
         // Insert the new user into the database 
-        if ($insert_stmt = $mysqli->prepare("INSERT INTO artists (username, email, password, salt) VALUES (?, ?, ?, ?)")) {
-            $insert_stmt->bind_param('ssss', $username, $email, $password, $random_salt);
+        if ($insert_stmt = $mysqli->prepare("INSERT INTO artists (username,artist_name, email, password, salt) VALUES (?,?, ?, ?, ?)")) {
+            $insert_stmt->bind_param('sssss', $username, $username, $email, $password, $random_salt);
             // Execute the prepared query.
             if (! $insert_stmt->execute()) {
                 header('Location: error.php?err=Registration failure: INSERT');

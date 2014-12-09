@@ -27,8 +27,11 @@ if (login_check($mysqli) == true) {
     $is_logged = false;
 }
 
+//var_dump($_SESSION);
+
 
 //ho@usc.edu Rednose11
 //lennon@usc.edu    Beatles9
 //leng@usc.edu      aNakin51
+//thesir@usc.edu    SoyAdmin666
 ?>

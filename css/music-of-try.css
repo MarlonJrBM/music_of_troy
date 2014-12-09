@@ -94,7 +94,14 @@ a.bg-danger:hover {
 
 
 
-
+.other-controller {
+    border: 1px solid #c43c35;
+    padding: 5px;
+    margin: 3px;
+}
+.other-controller small {
+    color: #c43c35;
+}
 
 
 
