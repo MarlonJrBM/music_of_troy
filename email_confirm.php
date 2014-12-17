@@ -11,7 +11,7 @@ if (!empty($_POST['email']) && !empty($_POST['subject']) && !empty($_POST['name'
     $email = $_POST['email'];
     $subject = $_POST['subject'];
     $msg = $_POST['name'] ." sent you a message: \n" . $_POST['msg'];
-    $headers = "";
+    $headers = "From: <$email>\n";
     if (mail($to, $subject, $msg, $headers)) {
         $msg_success = true;
     }
