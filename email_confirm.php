@@ -15,6 +15,8 @@ if (!empty($_POST['email']) && !empty($_POST['subject']) && !empty($_POST['name'
     $headers = "From: <$email>\n";
     $headers .= "Return-Path: <$email>\n";
     $headers .= "X-Sender: <$name>\n";
+
+
     if (mail($to, $subject, $msg, $headers)) {
         $msg_success = true;
     }
