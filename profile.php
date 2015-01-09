@@ -33,12 +33,13 @@ if ($stmt = $mysqli->prepare("SELECT artist_name, username, biography, artist_im
 
 <!-- Title Header -->
 <div class="row">
-    <div class="span10">
+    <div class="span8">
         <h2>My Profile</h2>
         <h4><?php echo $username ?></h4>
 
     </div>
-    <div class="span2 text-right "><h4 ><a href="artist_album.php"> Manage My Albums</a></h4><br/></div>
+    <div class="span2 text-right "><h4 ><a href="artist_album.php"> Manage My Albums</a></h4></div>
+    <div class="span2 text-right "><h4 ><a href="artist_concert.php"> Manage My Concerts</a></h4></div>
 
         <br/><br/>
 

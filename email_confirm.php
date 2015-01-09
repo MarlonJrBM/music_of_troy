@@ -10,8 +10,11 @@ if (!empty($_POST['email']) && !empty($_POST['subject']) && !empty($_POST['name'
     $to = "marlonbr1@gmail.com";
     $email = $_POST['email'];
     $subject = $_POST['subject'];
+    $name = $_POST['name'];
     $msg = $_POST['name'] ." sent you a message: \n" . $_POST['msg'];
-    $headers = "";
+    $headers = "From: <$email>\n";
+    $headers .= "Return-Path: <$email>\n";
+    $headers .= "X-Sender: <$name>\n";
     if (mail($to, $subject, $msg, $headers)) {
         $msg_success = true;
     }

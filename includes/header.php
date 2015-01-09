@@ -46,6 +46,7 @@ include_once 'includes/pre-header.php';
 <!--    <script src="js/jquery.custom.js"></script>-->
     <script type="text/JavaScript" src="js/sha512.js"></script>
     <script type="text/JavaScript" src="js/forms.js"></script>
+    <script type="text/JavaScript" src="js/jQuery-post-workaround.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0/angular.min.js"></script>
     <script src="js/dirPagination.js"></script>
     <script src="js/controllers.js"></script>

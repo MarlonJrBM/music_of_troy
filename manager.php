@@ -45,6 +45,7 @@ include_once 'includes/header.php';
             <img src="{{artist.image_path}}"/>
             <h5>{{artist.artist_name}}</h5>
             <p>{{artist.biography}}</p>
+            <a href="user_edit.php?artist_id={{artist.artist_id}}"><button class="btn btn-small btn-info" type="button">Edit</button></a>
             <a href="delete_artist.php?artist_id={{artist.artist_id}}"><button class="btn btn-small btn-danger" type="button">Delete</button></a>
             <br/><br/>
         </div>
